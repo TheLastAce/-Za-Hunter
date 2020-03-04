@@ -49,5 +49,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             }
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+            
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "pin")
+            if pinView == nil{
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
+                pinView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+            }
+            else{
+                pinView?.annotation = annotation
+            }
+            return pinView
+        }
+    }
+    
+    mapView annotation
+    
+    perform segue(withIdentifier: "ShowLocationsDeatailsSegue", sender: nil)
 }
-
